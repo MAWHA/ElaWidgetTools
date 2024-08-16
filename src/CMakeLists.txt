@@ -23,13 +23,6 @@ foreach(filepath ${CPP_FILES})
     list(APPEND sources_files ${filename})
 endforeach(filepath)
 
-
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/private
-    ${CMAKE_CURRENT_SOURCE_DIR}/DeveloperComponents
-)
-
 set(PROJECT_SOURCES
     ${sources_files}
 )
@@ -49,6 +42,16 @@ add_library(${PROJECT_NAME} ${LIB_TYPE}
     ${sources_files}
 )
 endif()
+
+add_library(ElaWidgetTools::ElaWidgetTools ALIAS ${PROJECT_NAME})
+
+target_include_directories(${PROJECT_NAME}
+PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/DeveloperComponents
+PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/private
+)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
