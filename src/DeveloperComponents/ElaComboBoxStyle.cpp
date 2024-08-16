@@ -50,6 +50,10 @@ void ElaComboBoxStyle::drawControl(ControlElement element, const QStyleOption* o
     {
     case QStyle::CE_ComboBoxLabel:
     {
+        if (auto combo = qobject_cast<const QComboBox*>(widget); combo && combo->currentIndex() == -1) {
+            painter->setPen(ElaThemeColor(_themeMode, WindowTextDisable));
+            break;
+        }
         return;
     }
     case QStyle::CE_ShapedFrame:
