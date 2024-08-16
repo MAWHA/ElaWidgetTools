@@ -3,7 +3,7 @@
 
 #include <QTabBar>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ELA_EXPORT ElaTabBar : public QTabBar
 {
     Q_OBJECT

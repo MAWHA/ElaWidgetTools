@@ -5,7 +5,7 @@
 
 #include "Def.h"
 #include "singleton.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 #define eTheme ElaTheme::getInstance()
 #define ElaThemeColor(themeMode, themeColor) eTheme->getThemeColor(themeMode, ElaThemeType::themeColor)

@@ -3,7 +3,7 @@
 
 #include <QDockWidget>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaDockWidgetPrivate;
 class ELA_EXPORT ElaDockWidget : public QDockWidget
 {

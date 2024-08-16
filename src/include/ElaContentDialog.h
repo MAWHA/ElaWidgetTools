@@ -3,7 +3,7 @@
 #include <QAbstractNativeEventFilter>
 #include <QDialog>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 class ElaContentDialogPrivate;
 class ELA_EXPORT ElaContentDialog : public QDialog

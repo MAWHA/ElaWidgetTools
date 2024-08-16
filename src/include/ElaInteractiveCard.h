@@ -5,7 +5,7 @@
 #include <QPushButton>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 class ElaInteractiveCardPrivate;
 class ELA_EXPORT ElaInteractiveCard : public QPushButton

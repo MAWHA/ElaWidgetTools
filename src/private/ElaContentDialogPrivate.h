@@ -4,7 +4,7 @@
 #include <QObject>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class QVBoxLayout;
 class ElaPushButton;
 class ElaContentDialog;

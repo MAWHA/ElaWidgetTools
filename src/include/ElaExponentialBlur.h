@@ -4,7 +4,7 @@
 #include <QObject>
 
 #include "singleton.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 class ElaExponentialBlurPrivate;
 class ELA_EXPORT ElaExponentialBlur : public QObject

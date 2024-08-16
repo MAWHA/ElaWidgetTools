@@ -4,7 +4,7 @@
 #include <QAbstractTableModel>
 #include <QMetaEnum>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class T_IconModel : public QAbstractTableModel
 {
     Q_OBJECT

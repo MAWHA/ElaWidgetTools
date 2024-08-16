@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaThemeAnimationWidget : public QWidget
 {
     Q_OBJECT

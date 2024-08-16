@@ -5,7 +5,7 @@
 #include <QWidget>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 class ElaSuggestBoxPrivate;
 class ELA_EXPORT ElaSuggestBox : public QWidget

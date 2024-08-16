@@ -4,7 +4,7 @@
 #include <QMainWindow>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaWindowPrivate;
 class QStackedWidget;
 class ELA_EXPORT ElaWindow : public QMainWindow

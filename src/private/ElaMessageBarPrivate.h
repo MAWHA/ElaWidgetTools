@@ -8,7 +8,7 @@
 
 #include "Def.h"
 #include "singleton.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 enum WorkStatus
 {

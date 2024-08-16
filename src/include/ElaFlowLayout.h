@@ -5,7 +5,7 @@
 #include <QMap>
 #include <QStyle>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaFlowLayoutPrivate;
 class ELA_EXPORT ElaFlowLayout : public QLayout
 {

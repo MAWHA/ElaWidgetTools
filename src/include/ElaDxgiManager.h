@@ -4,7 +4,7 @@
 #include <QWidget>
 #ifdef Q_OS_WIN
 #include "singleton.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 class ElaDxgiManagerPrivate;
 class ELA_EXPORT ElaDxgiManager : public QObject

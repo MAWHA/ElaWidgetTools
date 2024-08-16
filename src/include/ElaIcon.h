@@ -4,7 +4,7 @@
 
 #include "Def.h"
 #include "singleton.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ELA_EXPORT ElaIcon
 {
     Q_SINGLETON_CREATE_H(ElaIcon)

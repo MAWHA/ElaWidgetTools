@@ -5,7 +5,7 @@
 #include <QObject>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class QLayout;
 class ElaMenu;
 class QVBoxLayout;

@@ -3,7 +3,7 @@
 
 #include <QScrollArea>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ELA_EXPORT ElaScrollArea : public QScrollArea
 {
     Q_OBJECT

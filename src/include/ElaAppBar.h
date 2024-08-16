@@ -5,7 +5,7 @@
 #include <QWidget>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaAppBarPrivate;
 class ELA_EXPORT ElaAppBar : public QWidget, QAbstractNativeEventFilter
 {

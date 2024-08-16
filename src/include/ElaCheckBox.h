@@ -3,7 +3,7 @@
 
 #include <QCheckBox>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ELA_EXPORT ElaCheckBox : public QCheckBox
 {
     Q_OBJECT

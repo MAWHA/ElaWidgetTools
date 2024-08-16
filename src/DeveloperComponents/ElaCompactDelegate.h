@@ -4,7 +4,7 @@
 #include <QStyledItemDelegate>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaNavigationNode;
 class ElaBaseListView;
 class QPropertyAnimation;

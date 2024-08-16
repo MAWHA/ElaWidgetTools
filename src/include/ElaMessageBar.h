@@ -4,7 +4,7 @@
 #include <QWidget>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 class ElaMessageBarPrivate;
 class ELA_EXPORT ElaMessageBar : public QWidget

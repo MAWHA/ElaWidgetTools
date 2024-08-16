@@ -3,7 +3,7 @@
 
 #include <QStatusBar>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ELA_EXPORT ElaStatusBar : public QStatusBar
 {
     Q_OBJECT

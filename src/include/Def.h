@@ -2,7 +2,7 @@
 #define DEF_H
 #include <QObject>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 //枚举类导出  兼容QT5低版本
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)

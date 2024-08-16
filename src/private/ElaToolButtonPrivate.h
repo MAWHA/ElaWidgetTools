@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaToolButton;
 class ElaToolButtonStyle;
 class ElaToolButtonPrivate : public QObject

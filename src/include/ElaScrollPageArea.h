@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaScrollPageAreaPrivate;
 class ELA_EXPORT ElaScrollPageArea : public QWidget
 {

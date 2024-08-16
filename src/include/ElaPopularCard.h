@@ -4,7 +4,7 @@
 #include <QPixmap>
 #include <QWidget>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaPopularCardPrivate;
 class ELA_EXPORT ElaPopularCard : public QWidget
 {

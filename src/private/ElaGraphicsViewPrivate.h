@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaGraphicsView;
 class ElaGraphicsViewPrivate : public QObject
 {

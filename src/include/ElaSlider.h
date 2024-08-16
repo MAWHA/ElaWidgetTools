@@ -3,7 +3,7 @@
 
 #include <QSlider>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ELA_EXPORT ElaSlider : public QSlider
 {
     Q_OBJECT

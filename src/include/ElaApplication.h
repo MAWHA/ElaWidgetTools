@@ -5,7 +5,7 @@
 #include <QObject>
 
 #include "singleton.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 #define eApp ElaApplication::getInstance()
 class ElaApplicationPrivate;
 class ELA_EXPORT ElaApplication : public QObject

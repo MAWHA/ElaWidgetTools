@@ -5,7 +5,7 @@
 #include <QPixmap>
 #include <QPoint>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class QRadialGradient;
 class ElaPromotionCard;
 class ElaPromotionCardPrivate : public QObject

@@ -4,7 +4,7 @@
 #include <QLabel>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaTextPrivate;
 class ELA_EXPORT ElaText : public QLabel
 {

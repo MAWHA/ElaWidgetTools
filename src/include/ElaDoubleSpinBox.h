@@ -3,7 +3,7 @@
 
 #include <QDoubleSpinBox>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 class ElaDoubleSpinBoxPrivate;
 class ELA_EXPORT ElaDoubleSpinBox : public QDoubleSpinBox

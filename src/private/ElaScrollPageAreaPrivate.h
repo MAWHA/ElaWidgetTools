@@ -4,7 +4,7 @@
 #include <QObject>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaScrollPageArea;
 class ElaScrollPageAreaPrivate : public QObject
 {

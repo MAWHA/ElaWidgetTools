@@ -3,7 +3,7 @@
 
 #include <QProgressBar>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 class ElaProgressBarPrivate;
 class ELA_EXPORT ElaProgressBar : public QProgressBar

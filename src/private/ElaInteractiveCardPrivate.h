@@ -7,7 +7,7 @@
 #include <QSize>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaInteractiveCard;
 class ElaInteractiveCardPrivate : public QObject
 {

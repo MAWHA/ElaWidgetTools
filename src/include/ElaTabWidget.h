@@ -3,7 +3,7 @@
 
 #include <QTabWidget>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ELA_EXPORT ElaTabWidget : public QTabWidget
 {
     Q_OBJECT

@@ -5,7 +5,7 @@
 #include <QPixmap>
 #include <QPoint>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaMenu;
 class ElaMenuStyle;
 class ElaMenuPrivate : public QObject

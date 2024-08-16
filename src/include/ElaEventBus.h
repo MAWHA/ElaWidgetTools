@@ -6,7 +6,7 @@
 
 #include "Def.h"
 #include "singleton.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaEventPrivate;
 class ELA_EXPORT ElaEvent : public QObject
 {

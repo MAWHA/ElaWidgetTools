@@ -6,7 +6,7 @@
 #include <QObject>
 #include <QStyle>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaFlowLayout;
 class ElaFlowLayoutPrivate : public QObject
 {

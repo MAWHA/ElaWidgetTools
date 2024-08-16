@@ -7,7 +7,7 @@
 #include <QVector>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaSuggestion : public QObject
 {
     Q_OBJECT

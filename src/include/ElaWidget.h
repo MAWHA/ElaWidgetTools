@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 class ElaWidgetPrivate;
 class ELA_EXPORT ElaWidget : public QWidget

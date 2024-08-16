@@ -6,7 +6,7 @@
 #include <QObject>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaEvent;
 class ElaWindow;
 class ElaNavigationBar;

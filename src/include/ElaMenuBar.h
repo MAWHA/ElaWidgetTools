@@ -4,7 +4,7 @@
 #include <QMenuBar>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 class ElaMenu;
 class ELA_EXPORT ElaMenuBar : public QMenuBar

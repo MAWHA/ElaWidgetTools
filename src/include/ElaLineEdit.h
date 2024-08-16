@@ -4,7 +4,7 @@
 #include <QLineEdit>
 
 #include "Def.h"
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 class ElaLineEditPrivate;
 class ELA_EXPORT ElaLineEdit : public QLineEdit

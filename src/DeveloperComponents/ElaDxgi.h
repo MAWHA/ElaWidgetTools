@@ -8,7 +8,7 @@
 
 #include <QPixmap>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 
 class ElaDxgi : public QObject
 {

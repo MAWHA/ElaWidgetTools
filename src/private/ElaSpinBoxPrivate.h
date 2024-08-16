@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "stdafx.h"
+#include "ElaPropertyHelper.h"
 class ElaSpinBox;
 class ElaMenu;
 class ElaSpinBoxPrivate : public QObject
