@@ -1,5 +1,6 @@
 #include "ElaComboBoxStyle.h"
 
+#include <QComboBox>
 #include <QDebug>
 #include <QPainter>
 #include <QPainterPath>
