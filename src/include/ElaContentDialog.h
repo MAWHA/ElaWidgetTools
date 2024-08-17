@@ -21,6 +21,27 @@ public:
     void setLeftButtonText(QString text);
     void setMiddleButtonText(QString text);
     void setRightButtonText(QString text);
+
+    enum ButtonType {
+        None,
+        Cancel,
+        No,
+        Yes,
+    };
+
+    enum DialogType {
+        Notify,          //<! buttons: ok
+        Confirm,         //<! buttons: no, yes
+        ConfirmOrCancel, //<! buttons: cancel, no, yes
+    };
+
+    static int showMessageBox(
+        QWidget*                       parent,
+        const QString&                 title,
+        const QString&                 content,
+        DialogType                     type   = Confirm,
+        const QMap<QString, QVariant>& config = QMap<QString, QVariant>());
+
 Q_SIGNALS:
     Q_SIGNAL void leftButtonClicked();
     Q_SIGNAL void middleButtonClicked();

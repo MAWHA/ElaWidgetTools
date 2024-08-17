@@ -45,12 +45,13 @@ ElaContentDialog::ElaContentDialog(QWidget* parent)
     d->q_ptr = this;
 
     d->_shadowWidget = new QWidget(parent);
-    d->_shadowWidget->createWinId();
-    d->_shadowWidget->move(0, 0);
-    d->_shadowWidget->setFixedSize(parent->size());
-    d->_shadowWidget->setObjectName("ElaShadowWidget");
-    d->_shadowWidget->setStyleSheet("#ElaShadowWidget{background-color:rgba(0,0,0,90);}");
-    d->_shadowWidget->setVisible(true);
+    d->_shadowWidget->setVisible(false);
+    // d->_shadowWidget->createWinId();
+    // d->_shadowWidget->move(0, 0);
+    // d->_shadowWidget->setFixedSize(parent->size());
+    // d->_shadowWidget->setObjectName("ElaShadowWidget");
+    // d->_shadowWidget->setStyleSheet("#ElaShadowWidget{background-color:rgba(0,0,0,90);}");
+    // d->_shadowWidget->setVisible(true);
 
     resize(400, height());
     setWindowModality(Qt::ApplicationModal);
@@ -178,6 +179,65 @@ void ElaContentDialog::setRightButtonText(QString text)
 {
     Q_D(ElaContentDialog);
     d->_rightButton->setText(text);
+}
+
+int ElaContentDialog::showMessageBox(
+    QWidget* parent, const QString& title, const QString& content, DialogType type, const QMap<QString, QVariant>& config) {
+    ElaContentDialog dialog(parent);
+    auto             d = dialog.d_func();
+
+    switch (type) {
+        case Notify: {
+            d->_leftButton->setVisible(false);
+            d->_middleButton->setVisible(false);
+            d->_rightButton->setVisible(true);
+            dialog.setRightButtonText("确定");
+        } break;
+        case Confirm: {
+            d->_leftButton->setVisible(false);
+            d->_middleButton->setVisible(true);
+            d->_rightButton->setVisible(true);
+            dialog.setMiddleButtonText("否");
+            dialog.setRightButtonText("是");
+        } break;
+        case ConfirmOrCancel: {
+            d->_leftButton->setVisible(true);
+            d->_middleButton->setVisible(true);
+            d->_rightButton->setVisible(true);
+            dialog.setLeftButtonText("取消");
+            dialog.setMiddleButtonText("否");
+            dialog.setRightButtonText("是");
+        } break;
+    }
+
+    if (const auto w = qobject_cast<ElaText*>(d->_centralWidget->layout()->itemAt(0)->widget())) { w->setText(title); }
+    if (const auto w = qobject_cast<ElaText*>(d->_centralWidget->layout()->itemAt(2)->widget())) { w->setText(content); }
+
+    if (config.contains("cancel-text") && config.value("cancel-text").typeId() == QMetaType::QString) {
+        dialog.setLeftButtonText(config.value("cancel-text").toString());
+    }
+    if (config.contains("no-text") && config.value("no-text").typeId() == QMetaType::QString) {
+        dialog.setMiddleButtonText(config.value("no-text").toString());
+    }
+    if (config.contains("yes-text") && config.value("yes-text").typeId() == QMetaType::QString) {
+        dialog.setRightButtonText(config.value("yes-text").toString());
+    }
+
+    int exec_result = None;
+
+    connect(d->_leftButton, &ElaPushButton::clicked, &dialog, [&exec_result] {
+        exec_result = Cancel;
+    });
+    connect(d->_middleButton, &ElaPushButton::clicked, &dialog, [&exec_result] {
+        exec_result = No;
+    });
+    connect(d->_rightButton, &ElaPushButton::clicked, &dialog, [&exec_result] {
+        exec_result = Yes;
+    });
+
+    dialog.exec();
+
+    return exec_result;
 }
 
 void ElaContentDialog::showEvent(QShowEvent* event)
