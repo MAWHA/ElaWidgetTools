@@ -3640,6 +3640,7 @@ enum IconName
     X = 0xf4cd,
     Xmark = 0xf4ce,
     XmarkLarge = 0xf4cf,
+    PushPin = 0xf4d0,
 };
 Q_ENUM_CREATE(IconName)
 Q_END_ENUM_CREATE(ElaIconType)
