@@ -175,11 +175,16 @@ void ElaIconButton::paintEvent(QPaintEvent* event)
     }
     painter.drawRoundedRect(rect(), d->_pBorderRadius, d->_pBorderRadius);
     // 图标绘制
-    painter.setPen(isEnabled() ? d->_themeMode == ElaThemeType::Light ? underMouse() ? d->_pLightHoverIconColor : d->_pLightIconColor : underMouse() ? d->_pDarkHoverIconColor
-                                                                                                                                                     : d->_pDarkIconColor
-                               : ElaThemeColor(d->_themeMode, WindowTextDisable));
-    QColor color = isEnabled() ? d->_themeMode == ElaThemeType::Light ? underMouse() ? d->_pLightHoverIconColor : d->_pLightIconColor : underMouse() ? d->_pDarkHoverIconColor
-                                                                                                                                                     : d->_pDarkIconColor
+    painter.setPen(
+        isEnabled() ? d->_themeMode == ElaThemeType::Light
+                        ? (underMouse() || d->_pIsSelected) ? d->_pLightHoverIconColor : d->_pLightIconColor
+                    : (underMouse() || d->_pIsSelected) ? d->_pDarkHoverIconColor
+                                                        : d->_pDarkIconColor
+                    : ElaThemeColor(d->_themeMode, WindowTextDisable));
+    QColor color = isEnabled() ? d->_themeMode == ElaThemeType::Light
+                                   ? (underMouse() || d->_pIsSelected) ? d->_pLightHoverIconColor : d->_pLightIconColor
+                               : (underMouse() || d->_pIsSelected) ? d->_pDarkHoverIconColor
+                                                                   : d->_pDarkIconColor
                                : ElaThemeColor(d->_themeMode, WindowTextDisable);
     painter.drawText(0, 0, width(), height(), Qt::AlignVCenter | Qt::AlignHCenter, QChar((unsigned short)d->_pAwesome));
     painter.restore();
