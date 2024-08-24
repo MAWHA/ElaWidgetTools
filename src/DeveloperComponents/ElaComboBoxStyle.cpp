@@ -119,7 +119,9 @@ void ElaComboBoxStyle::drawControl(ControlElement element, const QStyleOption* o
                 }
             }
             // 文字绘制
-            painter->setPen(_themeMode == ElaThemeType::Light ? Qt::black : Qt::white);
+            painter->setPen(vopt->state.testFlag(QStyle::State_Enabled)
+                ? (_themeMode == ElaThemeType::Light ? Qt::black : Qt::white)
+                : ElaThemeColor(_themeMode, WindowTextDisable));
             painter->drawText(QRect(option->rect.x() + 15, option->rect.y(), option->rect.width() - 15, option->rect.height()), Qt::AlignVCenter, vopt->text);
             painter->restore();
         }
