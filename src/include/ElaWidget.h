@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+#include "Def.h"
 #include "ElaPropertyHelper.h"
 
 class ElaWidgetPrivate;
@@ -13,11 +14,15 @@ class ELA_EXPORT ElaWidget : public QWidget
 public:
     explicit ElaWidget(QWidget* parent = nullptr);
     ~ElaWidget();
-
+    void moveToCenter();
     void setIsStayTop(bool isStayTop);
     bool getIsStayTop() const;
     void setIsFixedSize(bool isFixedSize);
     bool getIsFixedSize() const;
+
+    void setWindowButtonFlag(ElaAppBarType::ButtonType buttonFlag, bool isEnable = true);
+    void setWindowButtonFlags(ElaAppBarType::ButtonFlags buttonFlags);
+    ElaAppBarType::ButtonFlags getWindowButtonFlags() const;
 
 protected:
     virtual void paintEvent(QPaintEvent* event) override;

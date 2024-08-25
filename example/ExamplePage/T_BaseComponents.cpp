@@ -5,7 +5,6 @@
 
 #include "ElaCheckBox.h"
 #include "ElaComboBox.h"
-#include "ElaMenu.h"
 #include "ElaMessageButton.h"
 #include "ElaMultiSelectComboBox.h"
 #include "ElaPlainTextEdit.h"
@@ -15,60 +14,13 @@
 #include "ElaSlider.h"
 #include "ElaSpinBox.h"
 #include "ElaText.h"
-#include "ElaTheme.h"
 #include "ElaToggleButton.h"
 #include "ElaToggleSwitch.h"
-#include "ElaToolButton.h"
 T_BaseComponents::T_BaseComponents(QWidget* parent)
-    : ElaScrollPage(parent)
+    : T_BasePage(parent)
 {
-    ElaText* subTitleText = new ElaText(this);
-    subTitleText->setText("https://github.com/Liniyous/ElaWidgetTools");
-    subTitleText->setTextInteractionFlags(Qt::TextSelectableByMouse);
-    subTitleText->setTextPixelSize(11);
-
-    ElaToolButton* documentationButton = new ElaToolButton(this);
-    documentationButton->setFixedHeight(35);
-    documentationButton->setIsTransparent(false);
-    documentationButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    //_toolButton->setPopupMode(QToolButton::MenuButtonPopup);
-    documentationButton->setText("Documentation");
-    documentationButton->setElaIcon(ElaIconType::FileDoc);
-    ElaMenu* documentationMenu = new ElaMenu(this);
-    documentationMenu->addElaIconAction(ElaIconType::CardsBlank, "CardsBlank");
-    documentationMenu->addElaIconAction(ElaIconType::EarthAmericas, "EarthAmericas");
-    documentationButton->setMenu(documentationMenu);
-
-    ElaToolButton* sourceButton = new ElaToolButton(this);
-    sourceButton->setFixedHeight(35);
-    sourceButton->setIsTransparent(false);
-    sourceButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    sourceButton->setText("Source");
-    sourceButton->setElaIcon(ElaIconType::NfcSymbol);
-    ElaMenu* sourceMenu = new ElaMenu(this);
-    sourceMenu->addElaIconAction(ElaIconType::FireBurner, "FireBurner");
-    sourceMenu->addElaIconAction(ElaIconType::Galaxy, "Galaxy~~~~");
-    sourceButton->setMenu(sourceMenu);
-
-    ElaToolButton* themeButton = new ElaToolButton(this);
-    themeButton->setFixedSize(35, 35);
-    themeButton->setIsTransparent(false);
-    themeButton->setElaIcon(ElaIconType::MoonStars);
-    connect(themeButton, &ElaToolButton::clicked, this, [=]() {
-        eTheme->setThemeMode(eTheme->getThemeMode() == ElaThemeType::Light ? ElaThemeType::Dark : ElaThemeType::Light);
-    });
-
-    QHBoxLayout* buttonLayout = new QHBoxLayout();
-    buttonLayout->addWidget(documentationButton);
-    buttonLayout->addSpacing(5);
-    buttonLayout->addWidget(sourceButton);
-    buttonLayout->addStretch();
-    buttonLayout->addWidget(themeButton);
-    buttonLayout->addSpacing(15);
-
-    ElaText* desText = new ElaText(this);
-    desText->setText("一些常用的基础组件被放置于此，可在此界面体验其效果并按需添加进项目中");
-    desText->setTextPixelSize(13);
+    // 顶部元素
+    QVBoxLayout* topLayout = createTopLayout("一些常用的基础组件被放置于此，可在此界面体验其效果并按需添加进项目中");
 
     _toggleSwitch = new ElaToggleSwitch(this);
     ElaScrollPageArea* toggleSwitchArea = new ElaScrollPageArea(this);
@@ -78,6 +30,15 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     toggleSwitchLayout->addWidget(toggleSwitchText);
     toggleSwitchLayout->addWidget(_toggleSwitch);
     toggleSwitchLayout->addStretch();
+    ElaToggleSwitch* toggleSwitchDisableSwitch = new ElaToggleSwitch(this);
+    ElaText* toggleSwitchDisableText = new ElaText("禁用", this);
+    toggleSwitchDisableText->setTextPixelSize(15);
+    connect(toggleSwitchDisableSwitch, &ElaToggleSwitch::toggled, this, [=](bool checked) {
+        _toggleSwitch->setDisabled(checked);
+    });
+    toggleSwitchLayout->addWidget(toggleSwitchDisableSwitch);
+    toggleSwitchLayout->addWidget(toggleSwitchDisableText);
+    toggleSwitchLayout->addSpacing(10);
 
     _toggleButton = new ElaToggleButton("Head", this);
     ElaScrollPageArea* toggleButtonArea = new ElaScrollPageArea(this);
@@ -87,6 +48,15 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     toggleButtonLayout->addWidget(toggleButtonText);
     toggleButtonLayout->addWidget(_toggleButton);
     toggleButtonLayout->addStretch();
+    ElaToggleSwitch* toggleButtonDisableSwitch = new ElaToggleSwitch(this);
+    ElaText* toggleButtonDisableText = new ElaText("禁用", this);
+    toggleButtonDisableText->setTextPixelSize(15);
+    connect(toggleButtonDisableSwitch, &ElaToggleSwitch::toggled, this, [=](bool checked) {
+        _toggleButton->setDisabled(checked);
+    });
+    toggleButtonLayout->addWidget(toggleButtonDisableSwitch);
+    toggleButtonLayout->addWidget(toggleButtonDisableText);
+    toggleButtonLayout->addSpacing(10);
 
     _comboBox = new ElaComboBox(this);
     QStringList comboList{
@@ -104,6 +74,15 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     comboBoxLayout->addWidget(comboBoxText);
     comboBoxLayout->addWidget(_comboBox);
     comboBoxLayout->addStretch();
+    ElaToggleSwitch* comboBoxDisableSwitch = new ElaToggleSwitch(this);
+    ElaText* comboBoxDisableText = new ElaText("禁用", this);
+    comboBoxDisableText->setTextPixelSize(15);
+    connect(comboBoxDisableSwitch, &ElaToggleSwitch::toggled, this, [=](bool checked) {
+        _comboBox->setDisabled(checked);
+    });
+    comboBoxLayout->addWidget(comboBoxDisableSwitch);
+    comboBoxLayout->addWidget(comboBoxDisableText);
+    comboBoxLayout->addSpacing(10);
 
     _multiSelectComboBox = new ElaMultiSelectComboBox(this);
     QStringList multiComboList{"执念的鱼", "提着灯闯过远洋的甄选", "继续下潜", "无需誓言", "我的心像自沉的旧母舰", "没入深渊", "我曾凝望曾是航向的日出"};
@@ -117,6 +96,15 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     multiSelectComboBoxLayout->addWidget(multiSelectComboBoxText);
     multiSelectComboBoxLayout->addWidget(_multiSelectComboBox);
     multiSelectComboBoxLayout->addStretch();
+    ElaToggleSwitch* multiSelectComboBoxDisableSwitch = new ElaToggleSwitch(this);
+    ElaText* multiSelectComboBoxDisableText = new ElaText("禁用", this);
+    multiSelectComboBoxDisableText->setTextPixelSize(15);
+    connect(multiSelectComboBoxDisableSwitch, &ElaToggleSwitch::toggled, this, [=](bool checked) {
+        _multiSelectComboBox->setDisabled(checked);
+    });
+    multiSelectComboBoxLayout->addWidget(multiSelectComboBoxDisableSwitch);
+    multiSelectComboBoxLayout->addWidget(multiSelectComboBoxDisableText);
+    multiSelectComboBoxLayout->addSpacing(10);
 
     _messageButton = new ElaMessageButton("Success", this);
     _messageButton->setBarTitle("Success");
@@ -150,6 +138,18 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     messageButtonLayout->addWidget(_warningMessageButton);
     messageButtonLayout->addWidget(_errorMessageButton);
     messageButtonLayout->addStretch();
+    ElaToggleSwitch* messageButtonDisableSwitch = new ElaToggleSwitch(this);
+    ElaText* messageButtonDisableText = new ElaText("禁用", this);
+    messageButtonDisableText->setTextPixelSize(15);
+    connect(messageButtonDisableSwitch, &ElaToggleSwitch::toggled, this, [=](bool checked) {
+        _messageButton->setDisabled(checked);
+        _infoMessageButton->setDisabled(checked);
+        _warningMessageButton->setDisabled(checked);
+        _errorMessageButton->setDisabled(checked);
+    });
+    messageButtonLayout->addWidget(messageButtonDisableSwitch);
+    messageButtonLayout->addWidget(messageButtonDisableText);
+    messageButtonLayout->addSpacing(10);
 
     _checkBox = new ElaCheckBox("CheckBox", this);
     ElaScrollPageArea* checkBoxArea = new ElaScrollPageArea(this);
@@ -159,6 +159,15 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     checkBoxLayout->addWidget(checkBoxText);
     checkBoxLayout->addWidget(_checkBox);
     checkBoxLayout->addStretch();
+    ElaToggleSwitch* checkBoxDisableSwitch = new ElaToggleSwitch(this);
+    ElaText* checkBoxDisableText = new ElaText("禁用", this);
+    checkBoxDisableText->setTextPixelSize(15);
+    connect(checkBoxDisableSwitch, &ElaToggleSwitch::toggled, this, [=](bool checked) {
+        _checkBox->setDisabled(checked);
+    });
+    checkBoxLayout->addWidget(checkBoxDisableSwitch);
+    checkBoxLayout->addWidget(checkBoxDisableText);
+    checkBoxLayout->addSpacing(10);
 
     _spinBox = new ElaSpinBox(this);
     ElaScrollPageArea* spinBoxArea = new ElaScrollPageArea(this);
@@ -204,11 +213,7 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     QWidget* centralWidget = new QWidget(this);
     centralWidget->setWindowTitle("ElaBaseComponents");
     QVBoxLayout* centerLayout = new QVBoxLayout(centralWidget);
-    centerLayout->addWidget(subTitleText);
-    centerLayout->addSpacing(5);
-    centerLayout->addLayout(buttonLayout);
-    centerLayout->addSpacing(5);
-    centerLayout->addWidget(desText);
+    centerLayout->addLayout(topLayout);
     centerLayout->addSpacing(5);
     centerLayout->addWidget(toggleSwitchArea);
     centerLayout->addWidget(toggleButtonArea);

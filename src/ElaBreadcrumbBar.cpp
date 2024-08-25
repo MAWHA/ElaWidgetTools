@@ -1,8 +1,6 @@
 #include "ElaBreadcrumbBar.h"
 
-#include <QFontMetrics>
 #include <QHeaderView>
-#include <QPainter>
 #include <QScroller>
 #include <QVBoxLayout>
 
@@ -15,6 +13,7 @@ ElaBreadcrumbBar::ElaBreadcrumbBar(QWidget* parent)
 {
     Q_D(ElaBreadcrumbBar);
     d->q_ptr = this;
+    d->_pTextPixelSize = 18;
     setFixedHeight(37);
     setObjectName("ElaBreadcrumbBar");
     setStyleSheet("#ElaBreadcrumbBar{background-color:transparent;}");
@@ -37,17 +36,31 @@ ElaBreadcrumbBar::ElaBreadcrumbBar(QWidget* parent)
         } });
     QFont textFont = this->font();
     textFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.5);
-    textFont.setPixelSize(28);
+    textFont.setPixelSize(d->_pTextPixelSize);
     d->_listView->setFont(textFont);
 
     QScroller::grabGesture(d->_listView->viewport(), QScroller::LeftMouseButtonGesture);
-    QScrollerProperties properties = QScroller::scroller(d->_listView->viewport())->scrollerProperties();
+    QScroller* scroller = QScroller::scroller(d->_listView->viewport());
+    QScrollerProperties properties = scroller->scrollerProperties();
     properties.setScrollMetric(QScrollerProperties::MousePressEventDelay, 0);
     properties.setScrollMetric(QScrollerProperties::HorizontalOvershootPolicy, QScrollerProperties::OvershootAlwaysOn);
     properties.setScrollMetric(QScrollerProperties::OvershootDragResistanceFactor, 0.35);
     properties.setScrollMetric(QScrollerProperties::OvershootScrollTime, 0.5);
     properties.setScrollMetric(QScrollerProperties::FrameRate, QScrollerProperties::Fps60);
-    QScroller::scroller(d->_listView->viewport())->setScrollerProperties(properties);
+    scroller->setScrollerProperties(properties);
+
+    connect(scroller, &QScroller::stateChanged, this, [=](QScroller::State newstate) {
+        if (newstate == QScroller::Pressed)
+        {
+            d->_listDelegate->setPressIndex(d->_listView->indexAt(d->_listView->mapFromGlobal(QCursor::pos())));
+            d->_listView->viewport()->update();
+        }
+        else if (newstate == QScroller::Scrolling || newstate == QScroller::Inactive)
+        {
+            d->_listDelegate->setPressIndex(QModelIndex());
+        }
+    });
+
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->addWidget(d->_listView);
@@ -55,6 +68,25 @@ ElaBreadcrumbBar::ElaBreadcrumbBar(QWidget* parent)
 
 ElaBreadcrumbBar::~ElaBreadcrumbBar()
 {
+}
+
+void ElaBreadcrumbBar::setTextPixelSize(int textPixelSize)
+{
+    Q_D(ElaBreadcrumbBar);
+    if (textPixelSize > 0)
+    {
+        d->_pTextPixelSize = textPixelSize;
+        QFont textFont = this->font();
+        textFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.5);
+        textFont.setPixelSize(d->_pTextPixelSize);
+        d->_listView->setFont(textFont);
+    }
+}
+
+int ElaBreadcrumbBar::getTextPixelSize() const
+{
+    Q_D(const ElaBreadcrumbBar);
+    return d->_pTextPixelSize;
 }
 
 void ElaBreadcrumbBar::setBreadcrumbList(QStringList breadcrumbList)

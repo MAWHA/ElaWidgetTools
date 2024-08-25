@@ -7,26 +7,28 @@
 #include <QVBoxLayout>
 
 #include "ElaLineEdit.h"
+#include "ElaListView.h"
 #include "ElaMessageBar.h"
-#include "ElaTableView.h"
-#include "ElaText.h"
 #include "T_IconDelegate.h"
 #include "T_IconModel.h"
 T_Icon::T_Icon(QWidget* parent)
-    : ElaScrollPage(parent)
+    : T_BasePage(parent)
 {
+    // 顶部元素
+    QVBoxLayout* topLayout = createTopLayout("一堆常用图标被放置于此，左键单击以复制其枚举");
+
     _metaEnum = QMetaEnum::fromType<ElaIconType::IconName>();
     QWidget* centralWidget = new QWidget(this);
     QVBoxLayout* centerVLayout = new QVBoxLayout(centralWidget);
     centerVLayout->setContentsMargins(0, 0, 5, 0);
     centralWidget->setWindowTitle("ElaIcon");
-    // TableView
-    _iconView = new ElaTableView(this);
-    _iconView->horizontalHeader()->sectionResizeMode(QHeaderView::Fixed);
-    _iconView->horizontalHeader()->setDefaultSectionSize(100);
-    _iconView->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
-    _iconView->verticalHeader()->setDefaultSectionSize(100);
-    connect(_iconView, &ElaTableView::clicked, this, [=](const QModelIndex& index) {
+    // ListView
+    _iconView = new ElaListView(this);
+    _iconView->setIsTransparent(true);
+    _iconView->setFlow(QListView::LeftToRight);
+    _iconView->setViewMode(QListView::IconMode);
+    _iconView->setResizeMode(QListView::Adjust);
+    connect(_iconView, &ElaListView::clicked, this, [=](const QModelIndex& index) {
         QString iconName = _iconModel->getIconNameFromModelIndex(index);
         if (iconName.isEmpty())
         {
@@ -41,15 +43,13 @@ T_Icon::T_Icon(QWidget* parent)
     _iconView->setItemDelegate(_iconDelegate);
     _iconView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    ElaText* iconTitle = new ElaText("On this page, you can use the search function to use your favorite icons in the program", this);
-    iconTitle->setTextPixelSize(15);
     _searchEdit = new ElaLineEdit(this);
     _searchEdit->setPlaceholderText("搜索图标");
     _searchEdit->setFixedSize(300, 35);
     connect(_searchEdit, &ElaLineEdit::textEdited, this, &T_Icon::onSearchEditTextEdit);
     connect(_searchEdit, &ElaLineEdit::focusIn, this, &T_Icon::onSearchEditTextEdit);
 
-    centerVLayout->addWidget(iconTitle);
+    centerVLayout->addLayout(topLayout);
     centerVLayout->addSpacing(13);
     centerVLayout->addWidget(_searchEdit);
     centerVLayout->addWidget(_iconView);
@@ -84,10 +84,4 @@ void T_Icon::onSearchEditTextEdit(const QString& searchText)
     _iconView->clearSelection();
     _iconView->scrollTo(_iconModel->index(0, 0));
     _iconView->viewport()->update();
-}
-
-void T_Icon::resizeEvent(QResizeEvent* event)
-{
-    this->_iconModel->setColumnCount(width() / 100);
-    ElaScrollPage::resizeEvent(event);
 }

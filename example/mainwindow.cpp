@@ -21,9 +21,10 @@
 #include "ElaText.h"
 #include "ElaToolBar.h"
 #include "ElaToolButton.h"
-#include "ElaWidget.h"
-#include "ExamplePage/T_BaseComponents.h"
-#include "ExamplePage/T_Card.h"
+#include "T_About.h"
+#include "T_BaseComponents.h"
+#include "T_Card.h"
+#include "T_View.h"
 #ifdef Q_OS_WIN
 #include "ExamplePage/T_ElaScreen.h"
 #endif
@@ -210,24 +211,21 @@ void MainWindow::initContent()
     _tabWidgetPage = new T_TabWidget(this);
     _popupPage = new T_Popup(this);
     _cardPage = new T_Card(this);
+    _viewPage = new T_View(this);
 
     // GraphicsView
     ElaGraphicsScene* scene = new ElaGraphicsScene(this);
     scene->setSceneRect(0, 0, 1500, 1500);
-    // scene->setSceneRect(0, 0, 1000, 1000);
     ElaGraphicsItem* item1 = new ElaGraphicsItem();
     item1->setWidth(100);
     item1->setHeight(100);
+    item1->setMaxLinkPortCount(100);
+    item1->setMaxLinkPortCount(1);
     ElaGraphicsItem* item2 = new ElaGraphicsItem();
     item2->setWidth(100);
     item2->setHeight(100);
-    // ElaGraphicsItem* item3 = new ElaGraphicsItem();
-    // item3->setWidth(100);
-    // item3->setHeight(100);
-    // item3->setPos(10, 10);
     scene->addItem(item1);
     scene->addItem(item2);
-    // scene->addItem(item3);
     ElaGraphicsView* view = new ElaGraphicsView(scene);
     view->setScene(scene);
 
@@ -240,10 +238,11 @@ void MainWindow::initContent()
 #endif
     // navigation(elaScreenWidget->property("ElaPageKey").toString());
     addPageNode("ElaBaseComponents", _baseComponentsPage, ElaIconType::CabinetFiling);
+    addPageNode("ElaView", _viewPage, ElaIconType::CameraViewfinder);
     addPageNode("ElaGraphics", view, 9, ElaIconType::KeySkeleton);
+    addPageNode("ElaCard", _cardPage, ElaIconType::Cards);
     addPageNode("ElaTabWidget", _tabWidgetPage, ElaIconType::Table);
     addPageNode("ElaPopup", _popupPage, ElaIconType::Envelope);
-    addPageNode("ElaCard", _cardPage, ElaIconType::Cards);
     addPageNode("ElaIcon", _iconPage, 99, ElaIconType::FontAwesome);
     addExpanderNode("TEST4", testKey_2, ElaIconType::Acorn);
     addExpanderNode("TEST5", testKey_1, testKey_2, ElaIconType::Acorn);
@@ -262,13 +261,14 @@ void MainWindow::initContent()
     addExpanderNode("TEST17", testKey_1, ElaIconType::Acorn);
 
     addFooterNode("About", nullptr, _aboutKey, 0, ElaIconType::User);
-    ElaWidget* widget = new ElaWidget();
-    widget->setWindowModality(Qt::ApplicationModal);
-    widget->hide();
+    T_About* aboutPage = new T_About();
+    aboutPage->hide();
     connect(this, &ElaWindow::navigationNodeClicked, this, [=](ElaNavigationType::NavigationNodeType nodeType, QString nodeKey) {
         if (_aboutKey == nodeKey)
         {
-            widget->show();
+            aboutPage->setFixedSize(400, 400);
+            aboutPage->moveToCenter();
+            aboutPage->show();
         }
     });
     addFooterNode("Setting", new QWidget(this), _settingKey, 0, ElaIconType::GearComplex);

@@ -63,6 +63,8 @@ void ElaAppBarPrivate::onStayTopButtonClicked()
     ::SetWindowPos(hwnd, _pIsStayTop ? HWND_TOPMOST : HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 #else
     q->window()->setWindowFlag(Qt::WindowStaysOnTopHint, _pIsStayTop);
+    _stayTopButton->setIsSelected(_pIsStayTop);
+    q->window()->show();
 #endif
 }
 
@@ -212,7 +214,7 @@ int ElaAppBarPrivate::_calculateMinimumWidth()
     {
         width += _iconLabel->width();
     }
-    width += 15;
+    width += 20;
     bool isHasNavigationBar = false;
     if (q->parentWidget()->findChild<ElaNavigationBar*>())
     {

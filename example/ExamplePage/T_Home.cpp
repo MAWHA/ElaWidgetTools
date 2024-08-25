@@ -15,9 +15,9 @@
 #include "ElaPopularCard.h"
 #include "ElaScrollArea.h"
 #include "ElaText.h"
+
 T_Home::T_Home(QWidget* parent)
-    : ElaScrollPage(parent)
-{
+    : ElaScrollPage(parent) {
     QWidget* centralWidget = new QWidget(this);
     centralWidget->setWindowTitle("Home");
     QVBoxLayout* centerVLayout = new QVBoxLayout(centralWidget);
@@ -35,11 +35,14 @@ T_Home::T_Home(QWidget* parent)
     homeCard->setTitle("ElaWidgetTool");
     homeCard->setSubTitle("5.0⭐ 实用程序与工具");
     homeCard->setInteractiveTips("免费下载");
-    homeCard->setDetailedText("ElaWidgetTools致力于为QWidget用户提供一站式的外观和实用功能解决方案,只需数十MB内存和极少CPU占用以支持高效而美观的界面开发");
+    homeCard->setDetailedText("ElaWidgetTools致力于为QWidget用户提供一站式的外观和实用功能解决方案,"
+                              "只需数十MB内存和极少CPU占用以支持高效而美观的界面开发");
     homeCard->setCardFloatPixmap(QPixmap(":/Resource/Image/IARC/IARC_7+.svg.png"));
 
     ElaPopularCard* homeCard1 = new ElaPopularCard(this);
-    connect(homeCard1, &ElaPopularCard::popularCardButtonClicked, this, [=]() { Q_EMIT elaScreenNavigation(); });
+    connect(homeCard1, &ElaPopularCard::popularCardButtonClicked, this, [=]() {
+        Q_EMIT elaScreenNavigation();
+    });
     homeCard1->setTitle("ElaScreen");
     homeCard1->setSubTitle("5.0⭐ 实用程序与工具");
     homeCard1->setCardPixmap(QPixmap(":/Resource/Image/control/AutomationProperties.png"));
@@ -48,7 +51,9 @@ T_Home::T_Home(QWidget* parent)
     homeCard1->setCardFloatPixmap(QPixmap(":/Resource/Image/IARC/IARC_7+.svg.png"));
 
     ElaPopularCard* homeCard2 = new ElaPopularCard(this);
-    connect(homeCard2, &ElaPopularCard::popularCardButtonClicked, this, [=]() { Q_EMIT elaSceneNavigation(); });
+    connect(homeCard2, &ElaPopularCard::popularCardButtonClicked, this, [=]() {
+        Q_EMIT elaSceneNavigation();
+    });
     homeCard2->setTitle("ElaScene");
     homeCard2->setSubTitle("5.0⭐ 实用程序与工具");
     homeCard2->setCardPixmap(QPixmap(":/Resource/Image/control/Canvas.png"));
@@ -57,7 +62,9 @@ T_Home::T_Home(QWidget* parent)
     homeCard2->setCardFloatPixmap(QPixmap(":/Resource/Image/IARC/IARC_7+.svg.png"));
 
     ElaPopularCard* homeCard3 = new ElaPopularCard(this);
-    connect(homeCard3, &ElaPopularCard::popularCardButtonClicked, this, [=]() { Q_EMIT elaBaseComponentNavigation(); });
+    connect(homeCard3, &ElaPopularCard::popularCardButtonClicked, this, [=]() {
+        Q_EMIT elaBaseComponentNavigation();
+    });
     homeCard3->setTitle("ElaBaseComponent");
     homeCard3->setSubTitle("5.0⭐ 实用程序与工具");
     homeCard3->setCardPixmap(QPixmap(":/Resource/Image/control/StandardUICommand.png"));
@@ -66,7 +73,9 @@ T_Home::T_Home(QWidget* parent)
     homeCard3->setCardFloatPixmap(QPixmap(":/Resource/Image/IARC/IARC_7+.svg.png"));
 
     ElaPopularCard* homeCard4 = new ElaPopularCard(this);
-    connect(homeCard4, &ElaPopularCard::popularCardButtonClicked, this, [=]() { Q_EMIT elaCardNavigation(); });
+    connect(homeCard4, &ElaPopularCard::popularCardButtonClicked, this, [=]() {
+        Q_EMIT elaCardNavigation();
+    });
     homeCard4->setTitle("ElaCard");
     homeCard4->setSubTitle("5.0⭐ 实用程序与工具");
     homeCard4->setCardPixmap(QPixmap(":/Resource/Image/control/FlipView.png"));
@@ -75,7 +84,9 @@ T_Home::T_Home(QWidget* parent)
     homeCard4->setCardFloatPixmap(QPixmap(":/Resource/Image/IARC/IARC_7+.svg.png"));
 
     ElaPopularCard* homeCard5 = new ElaPopularCard(this);
-    connect(homeCard5, &ElaPopularCard::popularCardButtonClicked, this, [=]() { Q_EMIT elaIconNavigation(); });
+    connect(homeCard5, &ElaPopularCard::popularCardButtonClicked, this, [=]() {
+        Q_EMIT elaIconNavigation();
+    });
     homeCard5->setTitle("ElaIcon");
     homeCard5->setSubTitle("5.0⭐ 实用程序与工具");
     homeCard5->setCardPixmap(QPixmap(":/Resource/Image/control/CommandBarFlyout.png"));
@@ -99,7 +110,7 @@ T_Home::T_Home(QWidget* parent)
     centerVLayout->addStretch();
     addCentralWidget(centralWidget);
     ElaText* homeStack1 = new ElaText("HomeStack1", this);
-    QFont font = homeStack1->font();
+    QFont    font       = homeStack1->font();
     font.setPixelSize(32);
     homeStack1->setFont(font);
     homeStack1->setAlignment(Qt::AlignCenter);
@@ -126,7 +137,7 @@ T_Home::T_Home(QWidget* parent)
     cardScrollArea->setWidgetResizable(true);
     cardScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     cardScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    cardScrollArea->setIsGrabGesture(Qt::Horizontal, true);
+    cardScrollArea->setIsGrabGesture(true);
     QWidget* cardScrollAreaWidget = new QWidget(this);
     cardScrollAreaWidget->setStyleSheet("background-color:transparent;");
     cardScrollArea->setWidget(cardScrollAreaWidget);
@@ -142,7 +153,7 @@ T_Home::T_Home(QWidget* parent)
     backgroundLayout->setContentsMargins(0, 0, 0, 0);
 
     // 菜单
-    _homeMenu = new ElaMenu(this);
+    _homeMenu          = new ElaMenu(this);
     ElaMenu* checkMenu = _homeMenu->addMenu(ElaIconType::Cubes, "查看");
     checkMenu->addAction("查看1");
     checkMenu->addAction("查看2");
@@ -179,48 +190,38 @@ T_Home::T_Home(QWidget* parent)
     qDebug() << "初始化成功";
 }
 
-T_Home::~T_Home()
-{
-}
+T_Home::~T_Home() {}
 
-void T_Home::mouseReleaseEvent(QMouseEvent* event)
-{
-    switch (event->button())
-    {
-    case Qt::LeftButton:
-    {
-        //ElaMessageBar::success(ElaMessageBarType::TopRight, "Success", "Never Close Your Eyes", 2500);
-        //ElaMessageBar::success(ElaMessageBarType::TopRight, "Success", "Never Close Your Eyes", 1500);
-        break;
-    }
-    case Qt::RightButton:
-    {
+void T_Home::mouseReleaseEvent(QMouseEvent* event) {
+    switch (event->button()) {
+        case Qt::LeftButton: {
+            // ElaMessageBar::success(ElaMessageBarType::TopRight, "Success", "Never Close Your Eyes", 2500);
+            // ElaMessageBar::success(ElaMessageBarType::TopRight, "Success", "Never Close Your Eyes", 1500);
+            break;
+        }
+        case Qt::RightButton: {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        _homeMenu->popup(event->globalPosition().toPoint());
+            _homeMenu->popup(event->globalPosition().toPoint());
 #else
-        _homeMenu->popup(event->globalPos());
+            _homeMenu->popup(event->globalPos());
 #endif
-        break;
-    }
-    case Qt::BackButton:
-    {
-        this->navigation(0);
-        break;
-    }
-    case Qt::ForwardButton:
-    {
-        this->navigation(1);
-        break;
-    }
-    case Qt::MiddleButton:
-    {
-        this->navigation(2);
-        break;
-    }
-    default:
-    {
-        break;
-    }
+            break;
+        }
+        case Qt::BackButton: {
+            this->navigation(0);
+            break;
+        }
+        case Qt::ForwardButton: {
+            this->navigation(1);
+            break;
+        }
+        case Qt::MiddleButton: {
+            this->navigation(2);
+            break;
+        }
+        default: {
+            break;
+        }
     }
     ElaScrollPage::mouseReleaseEvent(event);
 }

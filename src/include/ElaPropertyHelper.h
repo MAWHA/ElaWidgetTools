@@ -38,9 +38,8 @@ public:                                                                 \
 #define Q_PRIVATE_CREATE_Q_H(TYPE, M) \
                                       \
 public:                               \
-    Q_SIGNAL void p##M##Changed();    \
-    void          set##M(TYPE M);     \
-    TYPE          get##M() const;
+    void set##M(TYPE M);              \
+    TYPE get##M() const;
 
 #define Q_PROPERTY_CREATE_Q_CPP(CLASS, TYPE, M) \
     void CLASS::set##M(TYPE M) {                \
@@ -56,7 +55,6 @@ public:                               \
     void CLASS::set##M(TYPE M) {               \
         Q_D(CLASS);                            \
         d->_p##M = M;                          \
-        Q_EMIT p##M##Changed();                \
     }                                          \
     TYPE CLASS::get##M() const {               \
         return d_ptr->_p##M;                   \

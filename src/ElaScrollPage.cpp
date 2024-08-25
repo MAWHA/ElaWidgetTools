@@ -13,7 +13,6 @@
 #include "ElaNavigationRouter.h"
 #include "ElaScrollArea.h"
 #include "private/ElaScrollPagePrivate.h"
-Q_PROPERTY_CREATE_Q_CPP(ElaScrollPage, int, BorderRadius)
 ElaScrollPage::ElaScrollPage(QWidget* parent)
     : QWidget(parent), d_ptr(new ElaScrollPagePrivate())
 {
@@ -21,6 +20,7 @@ ElaScrollPage::ElaScrollPage(QWidget* parent)
     setProperty("ElaBaseClassName", "ElaScrollPage");
     d->q_ptr = this;
     d->_breadcrumbBar = new ElaBreadcrumbBar(this);
+    d->_breadcrumbBar->setTextPixelSize(28);
     connect(d->_breadcrumbBar, &ElaBreadcrumbBar::breadcrumbClicked, this, [=](QString breadcrumb, QStringList lastBreadcrumbList) {
         if (d->_centralWidgetMap.contains(breadcrumb))
         {
@@ -36,7 +36,6 @@ ElaScrollPage::ElaScrollPage(QWidget* parent)
     d->_pageTitleLayout->setContentsMargins(0, 0, 0, 0);
     d->_pageTitleLayout->addWidget(d->_breadcrumbBar);
 
-    d->_pBorderRadius = 5;
     d->_centralStackedWidget = new QStackedWidget(this);
     d->_centralStackedWidget->setContentsMargins(0, 0, 0, 0);
 
@@ -67,9 +66,11 @@ void ElaScrollPage::addCentralWidget(QWidget* centralWidget, bool isWidgetResize
         d->_breadcrumbBar->appendBreadcrumb(centralWidget->windowTitle());
     }
     ElaScrollArea* scrollArea = new ElaScrollArea(this);
+    scrollArea->setMouseTracking(true);
     scrollArea->setIsAnimation(Qt::Vertical, true);
     scrollArea->setWidgetResizable(isWidgetResizeable);
-    scrollArea->setIsGrabGesture(Qt::Vertical, isVerticalGrabGesture, mousePressEventDelay);
+    scrollArea->setIsGrabGesture(isVerticalGrabGesture, mousePressEventDelay);
+    scrollArea->setIsOverShoot(Qt::Vertical, true);
     scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     scrollArea->setWidget(centralWidget);
