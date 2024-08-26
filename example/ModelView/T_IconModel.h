@@ -5,7 +5,7 @@
 #include <QMetaEnum>
 
 #include "ElaPropertyHelper.h"
-class T_IconModel : public QAbstractTableModel
+class T_IconModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY_CREATE(bool, IsSearchMode)
