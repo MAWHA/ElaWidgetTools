@@ -24,7 +24,7 @@ void ElaLineEditStyle::drawPrimitive(PrimitiveElement element, const QStyleOptio
     {
         if (const QStyleOptionFrame* fopt = qstyleoption_cast<const QStyleOptionFrame*>(option))
         {
-            QRect lineEditRect = fopt->rect;
+            QRect lineEditRect = fopt->rect.adjusted(6, 0, -6, 0);
             painter->save();
             painter->setRenderHints(QPainter::Antialiasing);
             painter->setPen(Qt::NoPen);
@@ -49,11 +49,11 @@ void ElaLineEditStyle::drawPrimitive(PrimitiveElement element, const QStyleOptio
             // 底边线绘制
             painter->setBrush(ElaThemeColor(_themeMode, LineEditHemline));
             QPainterPath path;
-            path.moveTo(6, lineEditRect.height());
-            path.lineTo(lineEditRect.width() - 6, lineEditRect.height());
-            path.arcTo(QRectF(lineEditRect.width() - 12, lineEditRect.height() - 12, 12, 12), -90, 45);
-            path.lineTo(6 - 3 * std::sqrt(2), lineEditRect.height() - (6 - 3 * std::sqrt(2)));
-            path.arcTo(QRectF(0, lineEditRect.height() - 12, 12, 12), 270, 45);
+            path.moveTo(lineEditRect.left() + 6, lineEditRect.height());
+            path.lineTo(lineEditRect.right() - 6, lineEditRect.height());
+            path.arcTo(QRectF(lineEditRect.right() - 12, lineEditRect.height() - 12, 12, 12), -90, 45);
+            path.lineTo(lineEditRect.left() + 6 - 3 * std::sqrt(2), lineEditRect.height() - (6 - 3 * std::sqrt(2)));
+            path.arcTo(QRectF(lineEditRect.left(), lineEditRect.height() - 12, 12, 12), 270, 45);
             path.closeSubpath();
             painter->drawPath(path);
             painter->restore();

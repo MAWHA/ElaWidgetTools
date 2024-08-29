@@ -64,7 +64,8 @@ void ElaLineEdit::focusInEvent(QFocusEvent* event)
         markAnimation->setDuration(300);
         markAnimation->setEasingCurve(QEasingCurve::InOutSine);
         markAnimation->setStartValue(d->_pExpandMarkWidth);
-        markAnimation->setEndValue(width() / 2 - d->_pBorderRadius / 2);
+        //! line-edit has a margin of 6 in the style proxy impl
+        markAnimation->setEndValue(width() / 2 - d->_pBorderRadius / 2 - 6);
         markAnimation->start(QAbstractAnimation::DeleteWhenStopped);
     }
     QLineEdit::focusInEvent(event);
