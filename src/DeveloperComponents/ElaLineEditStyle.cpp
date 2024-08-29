@@ -24,7 +24,7 @@ void ElaLineEditStyle::drawPrimitive(PrimitiveElement element, const QStyleOptio
     {
         if (const QStyleOptionFrame* fopt = qstyleoption_cast<const QStyleOptionFrame*>(option))
         {
-            QRect lineEditRect = fopt->rect.adjusted(6, 0, -6, 0);
+            QRect lineEditRect = fopt->rect;
             painter->save();
             painter->setRenderHints(QPainter::Antialiasing);
             painter->setPen(Qt::NoPen);

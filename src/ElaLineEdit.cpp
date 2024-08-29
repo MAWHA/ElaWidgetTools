@@ -34,8 +34,8 @@ ElaLineEdit::ElaLineEdit(QWidget* parent)
     textFont.setLetterSpacing(QFont::AbsoluteSpacing, d->_textSpacing);
     setFont(textFont);
     setStyle(new ElaLineEditStyle(style()));
-    setStyleSheet(
-        "QLineEdit{padding-left: 10px;}");
+    setContentsMargins(6, 0, 6, 0);
+    setStyleSheet("QLineEdit{padding-left: 8px;padding-right: 8px;}");
     d->onThemeChanged(eTheme->getThemeMode());
     connect(eTheme, &ElaTheme::themeModeChanged, d, &ElaLineEditPrivate::onThemeChanged);
 }
